@@ -26,10 +26,30 @@ const title = document.getElementById("title")
 const artist = document.getElementById("artist")
 const prevButton = document.getElementById("prev")
 const nextButton = document.getElementById("next")
-
+const currenttime = document.getElementById("current-time")
+const duration = document.getElementById("duration")
+const progress = document.getElementById("progress")
 // set some variable
 let isplaying = false
 let songIndex = 1
+// play song function
+
+
+function currentTime() {
+    let formattedcrntTime = `${Math.floor(audioElement.currentTime / 60)} : ${Math.floor(audioElement.currentTime % 60)} `
+    let formattedDrtn = `${Math.floor(audioElement.duration / 60)} : ${Math.floor(audioElement.duration % 60)} `
+    currenttime.innerText = formattedcrntTime
+    duration.innerText = formattedDrtn
+    progress.style.width = `${audioElement.currentTime / audioElement.duration * 100}%`
+}
+
+// setting title,artist,song source etc
+function addingSrc(index) {
+    audioElement.src = `music/${music_list[index - 1].title}.mp3`
+    artist.innerText = music_list[index - 1].artist
+    image.src = `img/${music_list[index - 1].Image}.jpg`
+    title.innerText = music_list[index - 1].title
+}
 // play song function
 function playSong() {
     playButton.classList.add("fa-pause")
@@ -49,14 +69,6 @@ function pauseSong() {
 playButton.addEventListener("click", () => {
     isplaying ? pauseSong() : playSong()
 })
-
-// setting title,artist,song source etc
-function addingSrc(index) {
-    audioElement.src = `music/${music_list[index - 1].title}.mp3`
-    artist.innerText = music_list[index - 1].artist
-    image.src = `img/${music_list[index - 1].Image}.jpg`
-    title.innerText = music_list[index - 1].title
-}
 // next song function
 function nextSong() {
     songIndex >= music_list.length ? songIndex = 1 : songIndex++
@@ -71,14 +83,26 @@ function prevSong() {
     addingSrc(songIndex)
     playSong()
 }
-// default function after load window
-function defaultLoad() {
-    addingSrc(songIndex)
-}
 // adding event to next button
 nextButton.addEventListener("click", nextSong)
 // adding event to prev button
 prevButton.addEventListener("click", prevSong)
+
+//default function after window load
+function windowLoad() {
+    addingSrc(songIndex)
+    setInterval(() => {
+        currentTime()
+        // if (audioElement.currentTime = audioElement.duration) nextSong()
+    }, 100);
+
+    // playing next song after finishing the song
+
+}
+progress.addEventListener("click", (e) => {
+    console.log(e.offsetX)
+})
+
 // adding event to window
-window.addEventListener("load", defaultLoad)
+window.addEventListener("load", windowLoad())
 
