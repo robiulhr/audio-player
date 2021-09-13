@@ -1,42 +1,65 @@
 <!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Player | CodingNepal</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 </head>
 
 <body>
-    <div class="player-container">
-        <!-- Song -->
-        <div class="img-container">
-            <img src="" alt="Album Art" id="image">
-        </div>
-        <h2 id="title"></h2>
-        <h3 id="artist"></h3>
-        <audio src=""></audio>
-        <!-- Progress -->
-        <div class="progress-container" id="progress-container">
-            <div class="progress" id="progress"></div>
-            <div class="duration-wrapper">
-                <span id="current-time"></span>
-                <span id="duration"></span>
-            </div>
-        </div>
-        <!-- Controls -->
-        <div class="player-controls">
-            <i class="fas fa-backward" id="prev" title="Previous"></i>
-            <i class="fas fa-play main-button" id="play" title="Play"></i>
-            <i class="fas fa-forward" id="next" title="Next"></i>
-        </div>
+  <div class="wrapper">
+    <div class="top-bar">
+      <i class="material-icons">expand_more</i>
+      <span>Now Playing</span>
+      <i class="material-icons">more_horiz</i>
     </div>
-    <!-- Script -->
-    <script src="script.js"></script>
+    <div class="img-area">
+      <img src="" alt="" id="image" />
+    </div>
+    <div class="song-details">
+      <p class="name" id="title"></p>
+      <p class="artist" id="artist"></p>
+    </div>
+    <div class="progress-area" id="progress-container">
+      <div class="progress-bar" id="progress">
+        <audio id="main-audio" src=""></audio>
+      </div>
+      <div class="song-timer">
+        <span class="current-time" id="current-time">0:00</span>
+        <span class="max-duration" id="duration">0:00</span>
+      </div>
+    </div>
+    <div class="controls">
+      <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
+      <i id="prev" class="material-icons" id="prev">skip_previous</i>
+      <div class="play-pause">
+        <i class="material-icons" id="play">play_arrow</i>
+        <span class="material-icons-outlined">
 
+        </span>
+      </div>
+      <i id="next" class="material-icons" id="next">skip_next</i>
+      <i id="more-music" class="material-icons">queue_music</i>
+    </div>
+    <div class="music-list">
+      <div class="header">
+        <div class="row">
+          <i class="list material-icons">queue_music</i>
+          <span>Music list</span>
+        </div>
+        <i id="close" class="material-icons">close</i>
+      </div>
+      <ul>
+        <!-- here li list are coming from js -->
+      </ul>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
 </body>
 
 </html>
