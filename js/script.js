@@ -14,7 +14,13 @@ const music_list = [{
     title: "_tumi_chole_geco_onek_dure",
     artist: "Unknown",
     Image: "metric-1"
-}]
+},
+{
+    title: "Preme_Pora",
+    artist: "sreya_ghosal",
+    Image: "pic"
+}
+]
 
 
 
@@ -31,13 +37,21 @@ const duration = document.getElementById("duration")
 const progress = document.getElementById("progress")
 const progresscontainer = document.getElementById("progress-container")
 const repeatButton = document.getElementById("repeat-plist")
+const moremusic = document.getElementById("more-music")
+const musiclist = document.getElementById("music-list")
+const list = document.getElementById("list")
+const closelist = document.getElementById("close")
 // set some variable
 let isplaying = false
 let songIndex = 1
 let repeateActive = false
 // play song function
 
+// function sec_format(duration) {
 
+//     return `${Math.floor(duration / 60)} : ${Math.floor(duration % 60)} `;
+
+// }
 function currentTime() {
     // avoiding the NaN problem
     if (audioElement.duration) {
@@ -52,13 +66,54 @@ function currentTime() {
 audioElement.addEventListener("timeupdate", currentTime)
 
 
+
+// for (let i = 0; i < music_list.length; i++) {
+//     let listItem = `<li class="music-list-item" data-index="${i}">
+//                         <div class="row">
+//                             <span>${music_list[i].title}</span>
+//                             <p>${music_list[i].artist}</p>
+//                         </div>
+//                         <span id="${i}" class="audio-duration">Seconds</span>
+//                         <audio class="music-1" id="${i}" src="music/${music_list[i].title}.mp3"></audio>
+//                     </li> `
+//     console.log(this);
+//     list.innerHTML += listItem
+// }
+
+// var music_lists = document.querySelectorAll(".music-list-item");
+// music_lists.forEach(element => {
+//     element.addEventListener("click", (e) => {
+//         let m_index = element.getAttribute("data-index");
+//         addingSrc(Number(m_index) + 1);
+//     });
+//     setTimeout(() => {
+//         let c_duration = element.childNodes[5].duration;
+//         element.childNodes[3].innerText = sec_format(Math.round(c_duration));
+//     }, 500);
+//     // console.log(element.childNodes);
+// });
+
+
+
+
 // // setting title,artist,song source etc
 function addingSrc(index) {
     audioElement.src = `music/${music_list[index - 1].title}.mp3`
     artist.innerText = music_list[index - 1].artist
     image.src = `img/${music_list[index - 1].Image}.jpg`
     title.innerText = music_list[index - 1].title
+
+
+    // music_lists.forEach(element => {
+    //     let c_duration = element.childNodes[5].duration;
+    //     element.childNodes[3].innerText = sec_format(Math.round(c_duration));
+    // })
+
+    // music_lists[index - 1].childNodes[3].innerText = 'Playing';
 }
+
+
+
 // play song function
 async function playSong() {
     playButton.innerText = "pause"
@@ -98,7 +153,7 @@ prevButton.addEventListener("click", prevSong)
 // progress function
 function progres(e) {
     audioElement.currentTime = e.offsetX / progresscontainer.clientWidth * audioElement.duration
-    progress.style.width = `${(e.offsetX / progresscontainer.clientWidth) * 100}%`
+    progress.style.width = `${(e.offsetX / progresscontainer.clientWidth) * 100}% `
     playSong()
 }
 
@@ -119,12 +174,25 @@ function repeate() {
 }
 repeatButton.addEventListener("click", repeate)
 
+// show More music function
 
+function showMoremusic() {
+    musiclist.classList.add("show")
+}
 
+// adding event to more music button
+moremusic.addEventListener("click", showMoremusic)
+
+// close list function
+function closeMusiclist() {
+    musiclist.classList.remove("show")
+}
+closelist.addEventListener("click", closeMusiclist)
 
 //default function after window load
 function windowLoad() {
     addingSrc(songIndex)
+    audioElement.addEventListener("ended", nextSong)
 }
 // adding event to window
 window.addEventListener("load", windowLoad())
