@@ -1,17 +1,17 @@
 const music_list = [{
-    title: "_Kaise_Mujhe__Ghajini_",
+    title: "Kaise_Mujhe__Ghajini",
     artist: "A.R._Rahman",
     Image: "jacinto-1"
 }, {
-    title: "_Musafir_Song_",
+    title: "Musafir_Song",
     artist: "Palash_Muchhal",
     Image: "jacinto-2"
 }, {
-    title: "_Tum_Hi_Aana_(Sad_Version)_",
+    title: "Tum_Hi_Aana_(Sad_Version)",
     artist: "Jubin_Nautiyal",
     Image: "jacinto-3"
 }, {
-    title: "_tumi_chole_geco_onek_dure",
+    title: "tumi_chole_geco_onek_dure",
     artist: "Unknown",
     Image: "metric-1"
 },
@@ -47,11 +47,11 @@ let songIndex = 1
 let repeateActive = false
 // play song function
 
-// function sec_format(duration) {
+function sec_format(duration) {
 
-//     return `${Math.floor(duration / 60)} : ${Math.floor(duration % 60)} `;
+    return `${Math.floor(duration / 60)} : ${Math.floor(duration % 60)} `;
 
-// }
+}
 function currentTime() {
     // avoiding the NaN problem
     if (audioElement.duration) {
@@ -67,31 +67,31 @@ audioElement.addEventListener("timeupdate", currentTime)
 
 
 
-// for (let i = 0; i < music_list.length; i++) {
-//     let listItem = `<li class="music-list-item" data-index="${i}">
-//                         <div class="row">
-//                             <span>${music_list[i].title}</span>
-//                             <p>${music_list[i].artist}</p>
-//                         </div>
-//                         <span id="${i}" class="audio-duration">Seconds</span>
-//                         <audio class="music-1" id="${i}" src="music/${music_list[i].title}.mp3"></audio>
-//                     </li> `
-//     console.log(this);
-//     list.innerHTML += listItem
-// }
+for (let i = 0; i < music_list.length; i++) {
+    let listItem = `<li class="music-list-item" data-index="${i}">
+                        <div class="row">
+                            <span>${music_list[i].title}</span>
+                            <p>${music_list[i].artist}</p>
+                        </div>
+                        <span id="${i}" class="audio-duration">Seconds</span>
+                        <audio class="music-1" id="${i}" src="music/${music_list[i].title}.mp3"></audio>
+                    </li> `
+    console.log(this);
+    list.innerHTML += listItem
+}
 
-// var music_lists = document.querySelectorAll(".music-list-item");
-// music_lists.forEach(element => {
-//     element.addEventListener("click", (e) => {
-//         let m_index = element.getAttribute("data-index");
-//         addingSrc(Number(m_index) + 1);
-//     });
-//     setTimeout(() => {
-//         let c_duration = element.childNodes[5].duration;
-//         element.childNodes[3].innerText = sec_format(Math.round(c_duration));
-//     }, 500);
-//     // console.log(element.childNodes);
-// });
+var music_lists = document.querySelectorAll(".music-list-item");
+music_lists.forEach(element => {
+    element.addEventListener("click", (e) => {
+        let m_index = element.getAttribute("data-index");
+        addingSrc(Number(m_index) + 1);
+    });
+    setTimeout(() => {
+        let c_duration = element.childNodes[5].duration;
+        element.childNodes[3].innerText = sec_format(Math.round(c_duration));
+    }, 500);
+    // console.log(element.childNodes);
+});
 
 
 
@@ -104,12 +104,12 @@ function addingSrc(index) {
     title.innerText = music_list[index - 1].title
 
 
-    // music_lists.forEach(element => {
-    //     let c_duration = element.childNodes[5].duration;
-    //     element.childNodes[3].innerText = sec_format(Math.round(c_duration));
-    // })
+    music_lists.forEach(element => {
+        let c_duration = element.childNodes[5].duration;
+        element.childNodes[3].innerText = sec_format(Math.round(c_duration));
+    })
 
-    // music_lists[index - 1].childNodes[3].innerText = 'Playing';
+    music_lists[index - 1].childNodes[3].innerText = 'Playing';
 }
 
 
